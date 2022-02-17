@@ -1,0 +1,9 @@
+.form__error {
+  color: #FF3333;
+  font-size: 0.8em;
+  transition: .3s;
+  opacity: 1;
+  display: none;
+  position: absolute;
+  top: 30px;
+}
