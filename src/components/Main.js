@@ -1,18 +1,3 @@
-// function handleEditAvatarClick() {
-//   const profileAvatar = document.querySelector('.popup_type_avatar')
-//   profileAvatar.classList.add('popup_opened')
-
-// }
-// function handleEditProfileClick() {
-//   const profileInfo = document.querySelector('.popup_type_profile')
-//   profileInfo.classList.add('popup_opened')
-// }
-
-// function handleAddPlaceClick() {
-//   const card = document.querySelector('.popup_type_image');
-//   card.classList.add('popup_opened')
-// }
-
 import React from 'react';
 import api from '../utils/Api';
 import Card from './Card';
