@@ -3,18 +3,19 @@ import api from '../utils/Api';
 import Card from './Card';
 function Main(props) {
 
-  const [userName, setUserName] = React.useState({});
-  const [userDescription, setUserDescription] = React.useState({});
+  const [userName, setUserName] = React.useState('');
+  const [userDescription, setUserDescription] = React.useState('');
   const [userAvatar, setUserAvatar] = React.useState('');
   const [cards, setCards] = React.useState([])
 
   React.useEffect(() => {
     api.getUserInformation()
       .then(result => {
-        setUserName(result)
-        setUserAvatar(result)
-        setUserDescription(result)
+        setUserName(result.name)
+        setUserAvatar(result.avatar)
+        setUserDescription(result.about)
       })
+
       .catch (error => {console.log(error)
       })
   }, []);
@@ -38,16 +39,16 @@ function Main(props) {
         <div
           onClick={props.onEditAvatar}
         className="profile__avatar-container">
-          <div style={{backgroundImage: `url(${userAvatar.avatar})` }}   className="profile__avatar"></div>
+          <div style={{backgroundImage: `url(${userAvatar})` }}   className="profile__avatar"></div>
         </div>
         <div className="profile__info">
           <div className="profile__container">
-            <h1 className="profile__title page__title">{userName.name}</h1>
+            <h1 className="profile__title page__title">{userName}</h1>
             <button
             onClick={props.onEditProfile}
             type="button" className="profile__edit-button"></button>
           </div>
-          <p className="profile__description">{userDescription.about}</p>
+          <p className="profile__description">{userDescription}</p>
         </div>
         <button
           onClick={props.onAddPlace}
@@ -56,7 +57,7 @@ function Main(props) {
     <section className="cards section content__section">
       {cards.map((item) => {
         return (
-          <Card card={item}
+          <Card card={item} key={item._id}
           onCardClick={props.onCardClick}
           />
         )

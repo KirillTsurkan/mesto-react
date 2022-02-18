@@ -2,13 +2,13 @@ import React from 'react';
 
 function Card(props) {
 
-  function handleClick() {
+  function handleCardClick() {
     props.onCardClick(props.card);
   }
 
   return (
     <div class="cards__item" >
-        <img src={props.card.link} onClick={handleClick} alt={props.card.name} class="cards__photo"/>
+        <img src={props.card.link} onClick={handleCardClick} alt={props.card.name} class="cards__photo"/>
         <div class="cards__description-container">
           <h3 class="cards__title">{props.card.name}</h3>
           <div class="cards__conteiner-likes">

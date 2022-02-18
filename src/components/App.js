@@ -50,13 +50,13 @@ function App() {
       <PopupWithForm title = 'Редактировать профиль' name='profile' isOpen={isEditProfilePopupOpen} onClose={closeAllpopup}>
         <label className="popup__label">
         <div className="form__field">
-          <input type="text" className="form__input form__input_type_name" name="name" id="name" placeholder="Введите ваши данные" minLength="2" maxlength="40" required/>
+          <input type="text" className="form__input form__input_type_name" name="name" id="name" placeholder="Введите ваши данные" minLength="2" maxLength="40" required/>
           <span className="form__error" id="name-error"></span>
         </div>
       </label>
       <label className="popup__label">
         <div className="form__field">
-          <input type="text" className="form__input form__input_type_job" name="job" id="job" placeholder="вид деятельности" minlength="2" maxlength="200" required/>
+          <input type="text" className="form__input form__input_type_job" name="job" id="job" placeholder="вид деятельности" minLength="2" maxLength="200" required/>
           <span className="form__error" id="job-error"></span>
         </div>
       </label>
@@ -73,7 +73,7 @@ function App() {
       <PopupWithForm title = 'Добавить Место' name='place' isOpen={isAddPlacePopupOpen} onClose={closeAllpopup}>
         <label className="popup__label">
         <div className="form__field">
-          <input type="text" className="form__input form__input_type_place" name="place"  id="place" value="" placeholder="название" minlength="2" maxlength="30" required/>
+          <input type="text" className="form__input form__input_type_place" name="place"  id="place" value="" placeholder="название" minLength="2" maxLength="30" required/>
           <span className="form__error" id="place-error"></span>
         </div>
     </label>
@@ -84,7 +84,7 @@ function App() {
         </div>
     </label>
     </PopupWithForm>
-      <ImagePopup card={selectedCard} onClose={closeAllpopup}/>
+    <ImagePopup card={selectedCard} onClose={closeAllpopup}/>
   </div>
   );
 }
