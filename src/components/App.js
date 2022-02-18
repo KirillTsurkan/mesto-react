@@ -65,7 +65,7 @@ function App() {
       <PopupWithForm title = 'Сменить Аватар' name='avatar' isOpen={isEditAvatarPopupOpen} onClose={closeAllpopup}>
         <label className="popup__label">
         <div className="form__field">
-          <input type="url" className="form__input form__input_type_avatar" name="avatar" id="avatar" value="" placeholder="Ссылка на изоображение" required/>
+          <input type="url" className="form__input form__input_type_avatar" name="avatar" id="avatar" defaultValue="" placeholder="Ссылка на изоображение" required/>
           <span className="form__error" id="avatar-error"></span>
         </div>
       </label>
@@ -73,13 +73,13 @@ function App() {
       <PopupWithForm title = 'Добавить Место' name='place' isOpen={isAddPlacePopupOpen} onClose={closeAllpopup}>
         <label className="popup__label">
         <div className="form__field">
-          <input type="text" className="form__input form__input_type_place" name="place"  id="place" value="" placeholder="название" minLength="2" maxLength="30" required/>
+          <input type="text" className="form__input form__input_type_place" name="place"  id="place" defaultValue="" placeholder="название" minLength="2" maxLength="30" required/>
           <span className="form__error" id="place-error"></span>
         </div>
     </label>
     <label className="popup__label">
       <div className="form__field">
-        <input type="url" className="form__input form__input_type_link" name="link" id="link" value="" placeholder="ссылка на картинку" required/>
+        <input type="url" className="form__input form__input_type_link" name="link" id="link" defaultValue="" placeholder="ссылка на картинку" required/>
         <span className="form__error" id="link-error"></span>
         </div>
     </label>

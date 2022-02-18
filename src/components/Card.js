@@ -7,15 +7,15 @@ function Card(props) {
   }
 
   return (
-    <div class="cards__item" >
-        <img src={props.card.link} onClick={handleCardClick} alt={props.card.name} class="cards__photo"/>
-        <div class="cards__description-container">
-          <h3 class="cards__title">{props.card.name}</h3>
-          <div class="cards__conteiner-likes">
-            <button type="button" class="cards__like"></button>
-            <span class="cards__count-likes">{props.card.likes.length}</span>
+    <div className="cards__item" >
+        <img src={props.card.link} onClick={handleCardClick} alt={props.card.name} className="cards__photo"/>
+        <div className="cards__description-container">
+          <h3 className="cards__title">{props.card.name}</h3>
+          <div className="cards__conteiner-likes">
+            <button type="button" className="cards__like"></button>
+            <span className="cards__count-likes">{props.card.likes.length}</span>
           </div>
-          <button type="button"  class="cards__remove"></button>
+          <button type="button"  className="cards__remove"></button>
         </div>
       </div>
   )
