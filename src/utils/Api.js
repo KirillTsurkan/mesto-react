@@ -60,7 +60,7 @@
   }
 
 //Добавление карточки
-  addCard(data) {
+  addCard(name,link) {
     return fetch(`${this._url}cards`, {
       method: "POST",
       headers: {
@@ -68,8 +68,8 @@
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: data.name,
-        link: data.link,
+        name: name,
+        link: link,
       }),
   })
   .then(this._checkResponse)

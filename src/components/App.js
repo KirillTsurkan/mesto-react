@@ -9,6 +9,7 @@ import CurrentUserContext from "./contexts/CurrentUserContext";
 import api from "../utils/Api";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
@@ -35,14 +36,16 @@ function App() {
       });
   }, []);
 
+  // запрос API изменение аватара.
   function handleUpdateAvatar(user) {
-    api.editAvatar(user.avatar)
-    .then((res) => {
-      setCurrentUser(res);
-      closeAllpopup();
-    })
-    .catch((err) => console.log(err));
-}
+    api
+      .editAvatar(user.avatar)
+      .then((res) => {
+        setCurrentUser(res);
+        closeAllpopup();
+      })
+      .catch((err) => console.log(err));
+  }
 
   //обработчики попапов
   function handleEditAvatarClick() {
@@ -59,6 +62,7 @@ function App() {
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
   }
+
   // закрытие попапов
   function closeAllpopup() {
     setIsEditProfilePopupOpen(false);
@@ -88,6 +92,19 @@ function App() {
         console.log(error);
       });
   }, []);
+
+  //обработчик добавления карточек
+  function handleAddPlaceSubmit(card) {
+    api
+      .addCard(card.name, card.link)
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        closeAllpopup();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   // функция удаления карточек, запрос API.
   function handleCardDelete(card) {
@@ -130,50 +147,24 @@ function App() {
           onClose={closeAllpopup}
           onUpdateUser={handleUpdateUser}
         />
-
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllpopup}
           onUpdateAvatar={handleUpdateAvatar}
         />
-        <PopupWithForm
-          title="Добавить Место"
-          name="place"
+        <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllpopup}
-        >
-          <label className="popup__label">
-            <div className="form__field">
-              <input
-                type="text"
-                className="form__input form__input_type_place"
-                name="place"
-                id="place"
-                defaultValue=""
-                placeholder="название"
-                minLength="2"
-                maxLength="30"
-                required
-              />
-              <span className="form__error" id="place-error"></span>
-            </div>
-          </label>
-          <label className="popup__label">
-            <div className="form__field">
-              <input
-                type="url"
-                className="form__input form__input_type_link"
-                name="link"
-                id="link"
-                defaultValue=""
-                placeholder="ссылка на картинку"
-                required
-              />
-              <span className="form__error" id="link-error"></span>
-            </div>
-          </label>
-        </PopupWithForm>
+          onAddPlace={handleAddPlaceSubmit}
+        />
+
         <ImagePopup card={selectedCard} onClose={closeAllpopup} />
+        {/* <PopupWithForm
+          onClose={closeAllPopups}
+          name="confirm-delete"
+          title="Вы уверены?"
+          buttonName="Да"
+        ></PopupWithForm> */}
       </div>
     </CurrentUserContext.Provider>
   );

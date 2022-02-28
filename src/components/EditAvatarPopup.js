@@ -6,7 +6,7 @@ function EditAvatarPopup(props) {
 
   const avatarRef = React.useRef('');
 
-
+// используем хук для хранения данных.
   React.useEffect(() => {
     avatarRef.current.value = '';
   }, [props.isOpen])

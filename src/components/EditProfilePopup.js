@@ -1,25 +1,24 @@
-import React, { useEffect, useState, useContext } from "react";
+import React from "react";
 import CurrentUserContext from "./contexts/CurrentUserContext";
 import PopupWithForm from "./PopupWithForm";
 
 function EditProfilePopup(props) {
-  //контекст пользователя
+  //подписываемся на контекст пользователя
   const currentUser = React.useContext(CurrentUserContext);
 
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+  const [name, setName] = React.useState("");
+  const [description, setDescription] = React.useState("");
 
   function handleSubmit(e) {
-    // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
-
     // Передаём значения управляемых компонентов во внешний обработчик
     props.onUpdateUser({
-      name,
+      name, // запись из ТЗ(позже разобраться...)
       about: description,
     });
   }
-
+  // После загрузки текущего пользователя из API
+  // его данные будут использованы в управляемых компонентах.
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
@@ -27,14 +26,13 @@ function EditProfilePopup(props) {
 
   //Функция для изменения имени через поле ввода
   function handleUserName(event) {
-    setName(event.target.value)
+    setName(event.target.value);
   }
 
   //Функция для изменения описания профиля через поле ввода
   function handleUserDescription(event) {
-    setDescription(event.target.value)
+    setDescription(event.target.value);
   }
-
 
   return (
     <PopupWithForm
@@ -55,7 +53,7 @@ function EditProfilePopup(props) {
             onChange={handleUserName}
             minLength="2"
             maxLength="40"
-            value={name ? name : ''}
+            value={name ? name : ""}
             required
           />
           <span className="form__error" id="name-error"></span>
@@ -72,7 +70,7 @@ function EditProfilePopup(props) {
             onChange={handleUserDescription}
             minLength="2"
             maxLength="200"
-            value={description ? description : ''}
+            value={description ? description : ""}
             required
           />
           <span className="form__error" id="job-error"></span>
