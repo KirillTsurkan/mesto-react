@@ -29,7 +29,7 @@
     .then(this._checkResponse)
   }
 // редактирование профиля
-  editprofile(data) {
+  editProfile(name, job) {
     return fetch(`${this._url}users/me`, {
       method: "PATCH",
       headers: {
@@ -37,8 +37,8 @@
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: data.name,
-        about: data.job
+        name: name,
+        about: job
       }),
     })
       .then(this._checkResponse)
