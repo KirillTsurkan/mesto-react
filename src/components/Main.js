@@ -12,7 +12,7 @@ function Main(props) {
           <div
             onClick={props.onEditAvatar}
           className="profile__avatar-container">
-            <div style={{backgroundImage: `url(${currentUser.avatar})` }}   className="profile__avatar"></div>
+            <img src={`${currentUser.avatar}`}   className="profile__avatar"></img>
           </div>
           <div className="profile__info">
             <div className="profile__container">

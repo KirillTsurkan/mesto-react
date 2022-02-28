@@ -7,7 +7,8 @@ import ImagePopup from "./ImagePopup";
 import PopupWithForm from "./PopupWithForm";
 import CurrentUserContext from "./contexts/CurrentUserContext";
 import api from "../utils/Api";
-import EditProfilePopup from "./EditProfilePopup"
+import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
@@ -33,6 +34,15 @@ function App() {
         console.log(error);
       });
   }, []);
+
+  function handleUpdateAvatar(user) {
+    api.editAvatar(user.avatar)
+    .then((res) => {
+      setCurrentUser(res);
+      closeAllpopup();
+    })
+    .catch((err) => console.log(err));
+}
 
   //обработчики попапов
   function handleEditAvatarClick() {
@@ -88,16 +98,16 @@ function App() {
       })
       .catch((err) => console.log(err));
   }
-//Обработчик для отправки данных пользователя на сервер (редактирование данных профиля)
+  //Обработчик для отправки данных пользователя на сервер (редактирование данных профиля)
   function handleUpdateUser(user) {
-    api.editProfile(user.name, user.about)
-      .then(res => {
+    api
+      .editProfile(user.name, user.about)
+      .then((res) => {
         setCurrentUser(res);
         closeAllpopup();
       })
-      .catch(err => console.log(err))
+      .catch((err) => console.log(err));
   }
-
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -115,30 +125,17 @@ function App() {
 
         <Footer />
 
-        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllpopup} onUpdateUser={handleUpdateUser}/>
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllpopup}
+          onUpdateUser={handleUpdateUser}
+        />
 
-        <PopupWithForm
-          title="Сменить Аватар"
-          name="avatar"
+        <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllpopup}
-
-        >
-          <label className="popup__label">
-            <div className="form__field">
-              <input
-                type="url"
-                className="form__input form__input_type_avatar"
-                name="avatar"
-                id="avatar"
-                defaultValue=""
-                placeholder="Ссылка на изоображение"
-                required
-              />
-              <span className="form__error" id="avatar-error"></span>
-            </div>
-          </label>
-        </PopupWithForm>
+          onUpdateAvatar={handleUpdateAvatar}
+        />
         <PopupWithForm
           title="Добавить Место"
           name="place"
