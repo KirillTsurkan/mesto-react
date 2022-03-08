@@ -41,6 +41,7 @@ function handleCardLink(event) {
       isOpen={props.isOpen}
       onClose={props.onClose}
       onSubmit={handleSubmit}
+
     >
       <label className="popup__label">
         <div className="form__field">
@@ -53,7 +54,7 @@ function handleCardLink(event) {
             minLength="2"
             maxLength="30"
             onChange={handleCardTitle}
-            value={cardTitle ? cardTitle : ''}
+            value={cardTitle || ''}
             required
           />
           <span className="form__error" id="place-error"></span>
@@ -68,7 +69,7 @@ function handleCardLink(event) {
             id="link"
             placeholder="ссылка на картинку"
             onChange={handleCardLink}
-            value={cardLink ? cardLink : ''}
+            value={cardLink || ''}
             required
           />
           <span className="form__error" id="link-error"></span>

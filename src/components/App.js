@@ -72,7 +72,7 @@ function App() {
   }
 
   function handleCardLike(card) {
-    // Снова проверяем, есть ли уже лайк на этой карточке
+    //Проверяем, есть ли уже лайк на этой карточке.
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
@@ -100,6 +100,7 @@ function App() {
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllpopup();
+        console.log(card.name);
       })
       .catch((error) => {
         console.log(error);
@@ -125,10 +126,15 @@ function App() {
       })
       .catch((err) => console.log(err));
   }
+  const handleKeyDown =(evt) =>{
+    if(evt.key === 'Escape') {
+      closeAllpopup()
+    }
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className="page__container">
+      <div className="page__container" onKeyDown={handleKeyDown} tabIndex="0">
         <Header />
         <Main
           cards={cards}
@@ -146,6 +152,7 @@ function App() {
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllpopup}
           onUpdateUser={handleUpdateUser}
+
         />
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
